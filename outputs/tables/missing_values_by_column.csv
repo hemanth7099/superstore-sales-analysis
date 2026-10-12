@@ -1,0 +1,2 @@
+column,missing_count,percent_of_rows,treatment
+product_base_margin,63,0.75,Preserved as missing; no imputation applied

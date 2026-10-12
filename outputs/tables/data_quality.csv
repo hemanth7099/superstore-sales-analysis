@@ -1,0 +1,2 @@
+input_rows,duplicate_rows_removed,rows_after_deduplication,missing_cells_before_cleaning,missing_cells_after_cleaning,source_columns,source_columns_with_missing_values
+8399,0,8399,63,63,21,1

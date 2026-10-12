@@ -1,0 +1,10 @@
+metric,value
+rows_analyzed,8399.0
+unique_orders,5496.0
+unique_customers,795.0
+total_sales,14915600.82
+total_profit,1521767.98
+overall_profit_margin_pct,10.2
+average_sales_per_order,2713.9
+duplicate_rows_removed,0.0
+missing_cells_after_cleaning,63.0
