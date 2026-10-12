@@ -1,149 +1,100 @@
-# Superstore Sales Analysis (Python + SQL)
 
-A reproducible, end-to-end data analysis portfolio project using a sample retail sales dataset. It demonstrates data cleaning, quality checks, KPI calculation, exploratory data analysis, visualization, and business-oriented questions.
+# Superstore Sales & Profitability Analysis
 
-> **Dataset note:** The raw CSV is intentionally not included in this repository. Download it from the source below, verify the source's usage terms, and place it in `data/raw/`. Do not upload the raw data to GitHub unless you have confirmed you may redistribute it.
+A Python-based data analysis project exploring retail sales, profitability, regional performance, monthly trends, customers, products, and the relationship between discounts and profit.
 
-## Questions this project investigates
+## Project Overview
 
-- How do sales and profit trend over time?
-- Which regions and product categories drive sales and profit?
-- Which sub-categories are unprofitable?
-- Which products and customers contribute the most sales?
-- How are discounts associated with profit in this sample?
-- What data-quality issues (duplicates or missing values) need attention?
+This project uses Python and Pandas to clean and analyze a sample retail sales dataset. It generates key performance indicators (KPIs), summary tables, visualizations, and a written report to help explore business performance.
 
-## Tech stack
+## Key Results
+
+| Metric | Result |
+|---|---:|
+| Rows Analyzed | 8,399 |
+| Unique Orders | 5,496 |
+| Unique Customers | 795 |
+| Total Sales | 14,915,600.82 |
+| Total Profit | 1,521,767.98 |
+| Overall Profit Margin | 10.20% |
+| Average Sales per Order | 2,713.90 |
+
+## Data Visualizations
+
+### 1. Monthly Sales Trend
+
+![Monthly Sales Trend](outputs/figures/monthly_sales_trend.png)
+
+### 2. Monthly Profit Trend
+
+![Monthly Profit Trend](outputs/figures/monthly_profit_trend.png)
+
+### 3. Sales by Region
+
+![Sales by Region](outputs/figures/sales_by_region.png)
+
+### 4. Profit by Region
+
+![Profit by Region](outputs/figures/profit_by_region.png)
+
+### 5. Discount vs. Profit
+
+![Discount vs Profit](outputs/figures/discount_vs_profit.png)
+
+The Pearson correlation between discount and profit is -0.037 in this dataset, indicating a very weak linear association. Correlation does not establish causation.
+
+## Key Findings
+
+- **Sales performance:** The West region generated the highest sales in the analyzed dataset.
+- **Regional profitability:** Ontario had the highest total profit, at 346,868.54.
+- **Lowest regional profit:** Nunavut had the lowest total profit, at 2,841.11.
+- **Data quality:** No exact duplicate rows were found.
+- **Missing values:** 63 values in `product_base_margin` were preserved as missing rather than replaced with zero.
+
+## Tools and Technologies
 
 - Python
-- pandas — cleaning and aggregation
-- Matplotlib — charts
-- SQL — optional queries in `sql/analysis_queries.sql`
-- Git and GitHub — version control and portfolio sharing
+- Pandas
+- Matplotlib
+- SQL
+- Git and GitHub
 
-## 1. Install prerequisites (Windows)
+## Project Structure
 
-Install:
-
-1. **Python 3.11 or 3.12** from <https://www.python.org/downloads/windows/>. During installation, tick **Add Python to PATH**.
-2. **Git for Windows** from <https://git-scm.com/download/win>.
-3. **Visual Studio Code** from <https://code.visualstudio.com/> (recommended), then install the Python extension published by Microsoft.
-
-Open PowerShell and verify:
-
-```powershell
-py --version
-git --version
+```text
+superstore-sales-analysis/
+├── README.md
+├── requirements.txt
+├── src/
+│   └── analyze.py
+├── sql/
+│   └── analysis_queries.sql
+└── outputs/
+    ├── analysis_summary.md
+    ├── figures/
+    └── tables/
 ```
 
-If `py` is not recognized, reopen PowerShell after installation, or run `python --version`.
+## How to Run
 
-## 2. Download the dataset
+1. Install Python 3.11 or 3.12.
+2. Download the sample dataset and place it in `data/raw/`.
+3. Install dependencies:
 
-Use the Sample Superstore CSV from this public source page:
+   `pip install -r requirements.txt`
 
-<https://github.com/Technology-Hatchery/Rcode/blob/master/Data/Sample%20-%20Superstore%20Sales%20%28Excel%29.csv>
+4. Run the analysis from the project root:
 
-On that page, choose **Raw** / **Download raw file** and save the file into this project's `data/raw/` folder as:
+   `python src/analyze.py`
 
-`Sample - Superstore Sales (Excel).csv`
+The script generates cleaned data, summary tables, charts, and an analysis report.
 
-The analysis code normalizes common header variations (for example, `Order Date` becomes `order_date`). It requires at least the `Sales` and `Profit` columns; the standard Sample Superstore file includes other common fields such as order date, region, category, discount, and customer.
+## Limitations
 
-## 3. Open the project and create a virtual environment
+This is a portfolio and learning project based on a sample retail dataset. The findings describe this dataset only and should not be interpreted as proof of causal relationships. Missing product-base-margin values are documented and retained.
 
-In VS Code, choose **File → Open Folder** and select this project folder. Then open **Terminal → New Terminal** and run these commands from the project root:
+## Author
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
+**Hemanth Gandhi Muppalla**
 
-If PowerShell blocks activation scripts, you can skip activation and use the virtual environment's Python directly:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe src\analyze.py
-```
-
-## 4. Run the analysis
-
-With the environment activated:
-
-```powershell
-python src\analyze.py
-```
-
-Or pass a custom CSV path:
-
-```powershell
-python src\analyze.py --input "data/raw/your_dataset.csv"
-```
-
-Expected output:
-
-- `data/processed/superstore_clean.csv` — cleaned data; ignored by Git because it can be regenerated.
-- `outputs/analysis_summary.md` — calculated KPIs and main findings.
-- `outputs/tables/` — KPI, data-quality, monthly, region, category, sub-category and top-customer/product tables.
-- `outputs/figures/` — sales/profit charts saved as PNGs.
-
-Do not claim a specific accuracy or result until you've run the project against your downloaded dataset. The generated summary is calculated from the CSV you load.
-
-## 5. Push it to your GitHub profile
-
-First, create a **new empty public repository** on GitHub named `superstore-sales-analysis`. Do not initialize it with a README or `.gitignore`, because those are already present locally.
-
-In PowerShell, from the project root:
-
-```powershell
-git init -b main
-git add .
-git status
-git commit -m "Build retail sales analysis project"
-git remote add origin https://github.com/YOUR-GITHUB-USERNAME/superstore-sales-analysis.git
-git push -u origin main
-```
-
-Replace `YOUR-GITHUB-USERNAME` with your GitHub username. If Git asks you to authenticate, complete GitHub's sign-in flow. Never commit passwords, tokens, API keys, or private data.
-
-For later changes:
-
-```powershell
-git add .
-git commit -m "Add sales analysis findings and charts"
-git push
-```
-
-## 6. Make the repository look good to recruiters
-
-After running the project:
-
-1. Review `outputs/analysis_summary.md`; write 3–5 findings in your own words.
-2. Open the PNG charts and pick the clearest 2–3. You can embed them in this README with Markdown, for example:
-   `![Monthly sales and profit](outputs/figures/monthly_sales_profit_trend.png)`
-3. Add a **Key findings** section using only results generated by your dataset. Explain what each finding might mean for a business, and avoid saying correlation proves causation.
-4. Keep the `src/` code, `requirements.txt`, SQL file and README committed. The raw CSV stays local unless you have confirmed its redistribution terms.
-5. Add repository topics on GitHub: `python`, `pandas`, `data-analysis`, `exploratory-data-analysis`, `sql`, `data-visualization`.
-
-## Suggested LinkedIn project description
-
-**Superstore Sales & Profitability Analysis | Python, pandas, SQL, Matplotlib**
-
-Analyzed sample retail transaction data using Python and pandas. Built a reproducible workflow for data cleaning, quality checks, KPI calculation, sales/profit trend analysis and product/region performance comparisons. Generated charts and summary tables, and wrote SQL queries to investigate profitability, customer contribution and discount patterns.
-
-Only list SQL as a completed skill after running and understanding the optional queries. Add quantified results only after generating and validating them from your own run.
-
-## Next enhancements
-
-- Turn the analysis into an interactive Power BI dashboard.
-- Add automated tests for column validation and cleaning logic.
-- Load the cleaned CSV into SQLite/PostgreSQL and compare Python results with SQL results.
-- Add a Jupyter Notebook documenting the investigation question-by-question.
-
-## Dataset source
-
-Sample Superstore CSV hosted by Technology-Hatchery/Rcode: <https://github.com/Technology-Hatchery/Rcode/blob/master/Data/Sample%20-%20Superstore%20Sales%20%28Excel%29.csv>
-
-This repository is an educational portfolio project. Confirm the upstream dataset's usage terms and provenance before redistribution or commercial use.
+GitHub: [hemanth7099](https://github.com/hemanth7099)
